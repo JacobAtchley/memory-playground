@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryAllocations", "MemoryAllocations\MemoryAllocations.csproj", "{9E9CA0F6-53CE-4B72-B4BF-13273E0509A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryAllocations.Tests", "MemoryAllocations.Tests\MemoryAllocations.Tests.csproj", "{A5B67F2A-EB1D-4B52-96E9-E4BDF43D0AC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryAllocations.Benchmarks", "MemoryAllocations.Benchmarks\MemoryAllocations.Benchmarks.csproj", "{DB4FF815-B41A-45A2-8025-A4A93F5D2976}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E9CA0F6-53CE-4B72-B4BF-13273E0509A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E9CA0F6-53CE-4B72-B4BF-13273E0509A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E9CA0F6-53CE-4B72-B4BF-13273E0509A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E9CA0F6-53CE-4B72-B4BF-13273E0509A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5B67F2A-EB1D-4B52-96E9-E4BDF43D0AC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5B67F2A-EB1D-4B52-96E9-E4BDF43D0AC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5B67F2A-EB1D-4B52-96E9-E4BDF43D0AC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5B67F2A-EB1D-4B52-96E9-E4BDF43D0AC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB4FF815-B41A-45A2-8025-A4A93F5D2976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB4FF815-B41A-45A2-8025-A4A93F5D2976}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB4FF815-B41A-45A2-8025-A4A93F5D2976}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB4FF815-B41A-45A2-8025-A4A93F5D2976}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
