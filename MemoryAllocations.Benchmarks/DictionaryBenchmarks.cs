@@ -4,46 +4,53 @@ using BenchmarkDotNet.Attributes;
 
 namespace MemoryAllocations.Benchmarks;
 
-
-[MemoryDiagnoser]
 [SuppressMessage("Performance", "CA1822:Mark members as static")]
+[MemoryDiagnoser]
 public class DictionaryBenchmarks
 {
-        [Benchmark]
-        public void Benchmark_Bad()
-        {
-            ConcurrentDictionary<PersonAndDate, string> cache = new ();
-            var dateToCompare = new DateTime(1997, 12, 25);
-            var person = new Person("Jacob", new DateTime(1987, 12, 28));
-        
-            cache.GetOrAdd(
-                new PersonAndDate(person, dateToCompare), 
-                key => $"{key.Person.Name} was {key.Person.YearsOldIn(dateToCompare)} year(s) old on {dateToCompare:d}");
-        }
+    /// <summary>
+    /// A number of times to add a contact to the person record.
+    /// The more contacts we add the more memory we allocate.
+    /// </summary>
+    private const int CONTACT_COUNT = 100;
+    
+    private static string GetPersonAgeString(Person person, DateTime dateToCompare) => 
+        $"{person.Name} was {person.YearsOldIn(dateToCompare)} year(s) old on {dateToCompare:d}";
 
-        [Benchmark]
-        public void Benchmark_Better()
-        {
-            ConcurrentDictionary<PersonAndDate, string> cache = new ();
-            var dateToCompare = new DateTime(1997, 12, 25);
-            var person = new Person("Jacob", new DateTime(1987, 12, 28));
-        
-            cache.GetOrAdd(
-                new PersonAndDate(person, dateToCompare), 
-                static (key, args) => $"{key.Person.Name} was {key.Person.YearsOldIn(args)} year(s) old on {args:d}",
-                dateToCompare);
-        }
+    [Benchmark]
+    public void Dictionary_Closure_Allocation()
+    {
+        ConcurrentDictionary<Person, string> cache = new();
+        var dateToCompare = new DateTime(1997, 12, 25);
+        var person = new Person("Jacob", new DateTime(1987, 12, 28), CONTACT_COUNT);
 
-        [Benchmark]
-        public void Benchmark_Best()
-        {
-            ConcurrentDictionary<PersonAndDate, string> cache = new ();
-            var dateToCompare = new DateTime(1997, 12, 25);
-            var person = new Person("Jacob", new DateTime(1987, 12, 28));
-        
+        cache.GetOrAdd(person, key => GetPersonAgeString(key, dateToCompare));
+    }
 
-            cache.GetOrAdd(
-                new PersonAndDate(person, dateToCompare),
-                static key => $"{key.Person.Name} was {key.Person.YearsOldIn(key.Date)} year(s) old on {key.Date:d}");
-        }
+    [Benchmark]
+    public void Dictionary_Function_Arg()
+    {
+        ConcurrentDictionary<Person, string> cache = new();
+        var dateToCompare = new DateTime(1997, 12, 25);
+        var person = new Person("Jacob", new DateTime(1987, 12, 28), CONTACT_COUNT);
+
+        cache.GetOrAdd(
+            person,
+            static (key, args) => GetPersonAgeString(key, args),
+            dateToCompare);
+    }
+
+    private record PersonAndDate(Person Person, DateTime Date);
+    
+    [Benchmark]
+    public void Dictionary_Record_Key()
+    {
+        ConcurrentDictionary<PersonAndDate, string> cache = new();
+        var dateToCompare = new DateTime(1997, 12, 25);
+        var person = new Person("Jacob", new DateTime(1987, 12, 28), CONTACT_COUNT);
+
+        cache.GetOrAdd(
+            new PersonAndDate(person, dateToCompare),
+            static key => GetPersonAgeString(key.Person, key.Date));
+    }
 }

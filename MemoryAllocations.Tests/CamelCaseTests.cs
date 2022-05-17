@@ -14,7 +14,7 @@ public class CamelCaseTests
     {
         sut.CamelCaseStackAlloc().Should().Be(expected);
     }
-    
+
     [TestMethod]
     [DataRow("Fox Mulder", "foxMulder")]
     [DataRow("You are a very fancy boy!", "youAreAVeryFancyBoy")]

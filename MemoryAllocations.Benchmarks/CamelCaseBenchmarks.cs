@@ -12,7 +12,7 @@ public class CamelCaseBenchmarks
     {
         "HelLo WoRlD I am a string".CamelCaseStackAlloc();
     }
-    
+
     [Benchmark]
     public void Linq()
     {

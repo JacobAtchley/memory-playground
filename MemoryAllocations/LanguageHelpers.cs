@@ -13,7 +13,7 @@ public static class LanguageHelpers
             {
                 continue;
             }
-            
+
             if (i == 0)
             {
                 chars[writeIndex] = char.IsUpper(str[i]) ? char.ToLower(str[i]) : str[i];
@@ -27,14 +27,14 @@ public static class LanguageHelpers
                 writeIndex++;
                 continue;
             }
-            
+
             chars[writeIndex] = char.ToLower(str[i]);
             writeIndex++;
         }
-        
+
         return new string(chars);
     }
-    
+
     public static string CamelCaseLinq(this string str)
     {
         var chars = str.Split(' ')
@@ -42,9 +42,9 @@ public static class LanguageHelpers
             .SelectMany(x => x)
             .Where(char.IsLetter)
             .ToArray();
-        
+
         chars[0] = char.ToLower(chars[0]);
-        
+
         return new string(chars.ToArray());
     }
 }
